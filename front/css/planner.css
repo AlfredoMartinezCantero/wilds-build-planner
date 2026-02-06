@@ -1,0 +1,64 @@
+/* Contenedor principal de las piezas */
+#grid-armadura {
+    display: flex;
+    flex-direction: column; /* Alineación vertical */
+    gap: 12px;              /* Espacio uniforme entre bloques */
+    max-width: 500px;       /* Ancho controlado para que no se desparrame */
+}
+
+/* Cada bloque de pieza (Casco, Pechera, etc.) */
+.pieza-bloque {
+    background: var(--mh-gray);
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+/* Al pasar el ratón, se ilumina el borde (Feedback visual) */
+.pieza-bloque:hover {
+    border-color: var(--mh-gold);
+    background: #333;
+}
+
+/* Fila interna: Icono + Selector */
+.info-pieza {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.info-pieza img {
+    width: 42px;
+    height: 42px;
+    background: #111;
+    border: 1px solid #555;
+    padding: 4px;
+    object-fit: contain;
+}
+
+/* Estilo del selector (el "botón" desplegable) */
+.info-pieza select {
+    flex-grow: 1;
+    padding: 10px;
+    background: #1a1a1a;
+    color: #fff;
+    border: 1px solid #444;
+    font-family: 'Segoe UI', sans-serif;
+    cursor: pointer;
+    outline: none;
+}
+
+.info-pieza select:focus {
+    border-color: var(--mh-gold);
+}
+
+/* Habilidades que aparecen debajo del selector */
+.habilidades-mini {
+    margin-top: 8px;
+    padding-left: 57px; /* Alineado con el inicio del select */
+    font-size: 0.8rem;
+    color: #888;
+}

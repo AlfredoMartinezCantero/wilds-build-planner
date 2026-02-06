@@ -2,15 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Monster Hunter Wilds Build Planner</title>
+    <title>MH Wilds Builder</title>
     <link rel="stylesheet" href="css/estilo.css">
+    
+    <?php if(isset($css_propio)): ?>
+        <link rel="stylesheet" href="css/<?php echo $css_propio; ?>">
+    <?php endif; ?>
 </head>
-<body>
-    <header>
-        <h1>MH WILDS <span style="color:var(--mh-gold)">BUILDER</span></h1>
-        <nav>
-            <a href="index.php">Planner</a> | 
-            <a href="mis_builds.php">Mis Builds</a> | 
-            <a href="../admin/dashboard.php">Admin</a>
-        </nav>
-    </header>
