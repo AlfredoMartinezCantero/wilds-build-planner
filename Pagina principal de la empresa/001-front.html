@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hunter Metrics | Engineering & Optimization</title>
+    <style>
+        :root {
+            --primary-cian: #00e5ff;
+            --dark-bg: #0a0e14;
+            --card-bg: #161b22;
+            --text-gray: #8b949e;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 1px solid #30363d;
+            background: linear-gradient(180deg, #111827 0%, var(--dark-bg) 100%);
+        }
+
+        .logo-area h1 {
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .logo-area span {
+            color: var(--primary-cian);
+        }
+
+        .hero {
+            max-width: 800px;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero h2 {
+            font-size: 1.2rem;
+            color: var(--primary-cian);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-cian);
+        }
+
+        .stat-card h3 {
+            margin-top: 0;
+            color: white;
+        }
+
+        .btn-blueprint {
+            background: transparent;
+            border: 1px solid var(--primary-cian);
+            color: var(--primary-cian);
+            padding: 1rem 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 2rem;
+            transition: all 0.3s;
+        }
+
+        .btn-blueprint:hover {
+            background: var(--primary-cian);
+            color: var(--dark-bg);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <h1>Hunter <span>Metrics</span></h1>
+        </div>
+    </header>
+
+    <main class="hero">
+        <h2>Ingeniería de Diseño y Optimización</h2>
+        <p class="description">
+            Especialistas en transformar datos técnicos complejos en soluciones de software avanzadas. Eliminamos las barreras de entrada al análisis de equipo en Monster Hunter mediante planificación inteligente.
+        </p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Análisis IA</h3>
+                <p>Optimización de builds basada en algoritmos de recomendación.</p>
+            </div>
+            <div class="stat-card">
+                <h3>Data Sync</h3>
+                <p>Integración en tiempo real con las APIs oficiales de Wilds.</p>
+            </div>
+            <div class="stat-card">
+                <h3>Multi-Lang</h3>
+                <p>Soporte completo en español e inglés para la comunidad global.</p>
+            </div>
+        </div>
+
+        <button class="btn-blueprint" onclick="alert('Accediendo al panel de diseño...')">Lanzar Hunter's Blueprint</button>
+    </main>
+
+</body>
+</html>
