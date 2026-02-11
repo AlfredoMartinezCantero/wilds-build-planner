@@ -1,28 +1,85 @@
+/* 1. VARIABLES GLOBALES */
 :root {
     --mh-dark: #121212;
     --mh-gold: #c5a059;
+    --mh-gold-bright: #f39c12;
     --mh-gray: #2a2a2a;
     --text: #e0e0e0;
+    --transition: all 0.3s ease;
+}
+
+/* 2. RESET Y BASES */
+* {
+    box-sizing: border-box; /* Evita que el padding rompa el ancho */
 }
 
 body {
     background-color: var(--mh-dark);
     color: var(--text);
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
+    line-height: 1.6;
 }
 
+/* 3. CABECERA (Estilo Premium) */
 header {
-    background: #000;
-    padding: 1rem;
+    background: linear-gradient(to bottom, #1a1a1a, #000);
+    padding: 1.5rem;
     border-bottom: 2px solid var(--mh-gold);
     text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
+header h1 {
+    margin: 0;
+    color: var(--mh-gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.8rem;
+}
+
+/* 4. NAVEGACIÓN (Siguiendo tu modelo de menú) */
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: var(--text);
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: var(--transition);
+}
+
+nav a:hover {
+    color: var(--mh-gold-bright);
+}
+
+/* 5. CONTENEDOR PRINCIPAL */
 main {
     max-width: 1200px;
     margin: 20px auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
+    padding: 0 20px;
+    /* Quitamos el grid de aquí para que no afecte a todas las páginas por igual */
+}
+
+/* 6. PIE DE PÁGINA */
+footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+    color: #666;
+    border-top: 1px solid var(--mh-gray);
+    margin-top: 40px;
+}
+
+/* 7. RESPONSIVE (Human-Centric) */
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr; /* En móvil, todo en una columna */
+    }
+    
+    header h1 {
+        font-size: 1.4rem;
+    }
 }

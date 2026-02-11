@@ -1,64 +1,47 @@
-/* Contenedor principal de las piezas */
+/* Contenedor flexible */
 #grid-armadura {
     display: flex;
-    flex-direction: column; /* Alineación vertical */
-    gap: 12px;              /* Espacio uniforme entre bloques */
-    max-width: 500px;       /* Ancho controlado para que no se desparrame */
+    flex-direction: column;
+    gap: 15px;
+    width: 100%; /* Que ocupe su espacio asignado */
+    max-width: 600px; 
 }
 
-/* Cada bloque de pieza (Casco, Pechera, etc.) */
 .pieza-bloque {
     background: var(--mh-gray);
-    border: 1px solid #444;
-    border-radius: 6px;
-    padding: 12px;
+    border: 1px solid var(--mh-border);
+    border-radius: 8px;
+    padding: 15px;
+    min-height: 80px; /* Altura mínima, pero puede crecer */
     display: flex;
     flex-direction: column;
-    transition: all 0.3s ease;
+    justify-content: center;
+    overflow: hidden; /* Evita que nada salga de los bordes */
 }
 
-/* Al pasar el ratón, se ilumina el borde (Feedback visual) */
-.pieza-bloque:hover {
-    border-color: var(--mh-gold);
-    background: #333;
-}
-
-/* Fila interna: Icono + Selector */
 .info-pieza {
     display: flex;
     align-items: center;
     gap: 15px;
+    flex-wrap: wrap; /* Si no cabe en una línea, salta a la siguiente */
 }
 
-.info-pieza img {
-    width: 42px;
-    height: 42px;
-    background: #111;
-    border: 1px solid #555;
-    padding: 4px;
-    object-fit: contain;
-}
-
-/* Estilo del selector (el "botón" desplegable) */
 .info-pieza select {
-    flex-grow: 1;
+    flex: 1; /* El select ocupa el espacio sobrante */
+    min-width: 200px; /* Para que no se encoja demasiado */
     padding: 10px;
-    background: #1a1a1a;
-    color: #fff;
-    border: 1px solid #444;
-    font-family: 'Segoe UI', sans-serif;
-    cursor: pointer;
-    outline: none;
+    background: var(--mh-dark);
+    color: white;
+    border: 1px solid var(--mh-gold);
+    border-radius: 4px;
+    font-size: 1rem;
+    white-space: normal; /* Permite que el texto dentro del select se comporte mejor */
 }
 
-.info-pieza select:focus {
-    border-color: var(--mh-gold);
-}
-
-/* Habilidades que aparecen debajo del selector */
 .habilidades-mini {
-    margin-top: 8px;
-    padding-left: 57px; /* Alineado con el inicio del select */
-    font-size: 0.8rem;
-    color: #888;
+    margin-top: 10px;
+    padding-left: 57px;
+    font-size: 0.85rem;
+    color: var(--mh-gold);
+    word-break: break-word; /* Rompe palabras largas si es necesario */
 }
