@@ -10,6 +10,6 @@
         die("Error de conexión: " . mysqli_connect_error());
     }
     
-    // Establecer charset para evitar problemas con tildes (Human-centric)
+    // charset para evitar problemas con tildes
     mysqli_set_charset($conexion, "utf8mb4");
 ?>
