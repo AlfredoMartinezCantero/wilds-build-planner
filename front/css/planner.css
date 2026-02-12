@@ -1,47 +1,96 @@
-/* Contenedor flexible */
+/* =======================================
+   PLANNER – ESTILO MODERNO
+   ======================================= */
+
+/* Grid contenedor */
 #grid-armadura {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    width: 100%; /* Que ocupe su espacio asignado */
-    max-width: 600px; 
+    gap: 18px;
+    width: 100%;
+    max-width: 650px;
 }
 
+/* Bloque de cada pieza */
 .pieza-bloque {
-    background: var(--mh-gray);
-    border: 1px solid var(--mh-border);
-    border-radius: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     padding: 15px;
-    min-height: 80px; /* Altura mínima, pero puede crecer */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden; /* Evita que nada salga de los bordes */
+    box-shadow: 0 4px 10px var(--shadow);
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
+.pieza-bloque:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold);
+}
+
+/* Icono + select */
 .info-pieza {
     display: flex;
     align-items: center;
     gap: 15px;
-    flex-wrap: wrap; /* Si no cabe en una línea, salta a la siguiente */
 }
 
+.info-pieza img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 4px rgba(0,0,0,0.5));
+}
+
+/* Select moderno */
 .info-pieza select {
-    flex: 1; /* El select ocupa el espacio sobrante */
-    min-width: 200px; /* Para que no se encoja demasiado */
-    padding: 10px;
-    background: var(--mh-dark);
-    color: white;
-    border: 1px solid var(--mh-gold);
-    border-radius: 4px;
+    flex: 1;
+    padding: 12px;
     font-size: 1rem;
-    white-space: normal; /* Permite que el texto dentro del select se comporte mejor */
+    background: var(--bg-panel);
+    color: var(--text);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    outline: none;
+    transition: var(--transition);
 }
 
+.info-pieza select:hover {
+    border-color: var(--gold-bright);
+}
+
+.info-pieza select:focus {
+    border-color: var(--cian);
+    box-shadow: 0 0 4px var(--cian);
+}
+
+/* Texto de habilidades */
 .habilidades-mini {
     margin-top: 10px;
-    padding-left: 57px;
-    font-size: 0.85rem;
-    color: var(--mh-gold);
-    word-break: break-word; /* Rompe palabras largas si es necesario */
+    padding-left: 65px;
+    font-size: 0.9rem;
+    color: var(--gold);
+    opacity: 0.85;
+}
+
+/* PANEL DE STATS */
+#stats-panel {
+    margin-top: 40px;
+    padding: 20px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 10px var(--shadow);
+    border-radius: var(--radius);
+    max-width: 350px;
+}
+
+#stats-panel h2 {
+    color: var(--gold-bright);
+    margin-bottom: 15px;
+}
+
+#stats-panel div {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    padding: 8px;
+    background: var(--bg-card);
+    border-radius: 6px;
 }

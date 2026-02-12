@@ -1,85 +1,95 @@
-/* 1. VARIABLES GLOBALES */
+/* =======================================
+   ESTILO GLOBAL MODERNO – MH WILDS BUILDER
+   ======================================= */
+
+/* 1. PALETA DE COLORES */
 :root {
-    --mh-dark: #121212;
-    --mh-gold: #c5a059;
-    --mh-gold-bright: #f39c12;
-    --mh-gray: #2a2a2a;
-    --text: #e0e0e0;
-    --transition: all 0.3s ease;
+    --bg-dark: #0e0e10;
+    --bg-panel: #1a1a1d;
+    --bg-card: #1f1f24;
+    --gold: #c6a667;
+    --gold-bright: #e5c784;
+    --cian: #00e5ff;
+    --text: #e5e5e5;
+    --text-muted: #9a9a9a;
+    --border: #303030;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --radius: 10px;
+    --transition: 0.25s ease;
 }
 
-/* 2. RESET Y BASES */
+/* 2. BASE */
 * {
-    box-sizing: border-box; /* Evita que el padding rompa el ancho */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    background-color: var(--mh-dark);
+    background: var(--bg-dark);
     color: var(--text);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
     line-height: 1.6;
 }
 
-/* 3. CABECERA (Estilo Premium) */
+/* 3. CABECERA */
 header {
-    background: linear-gradient(to bottom, #1a1a1a, #000);
+    background: linear-gradient(180deg, #161616 0%, #0d0d0d 100%);
     padding: 1.5rem;
-    border-bottom: 2px solid var(--mh-gold);
+    border-bottom: 2px solid var(--gold);
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 12px var(--shadow);
 }
 
 header h1 {
-    margin: 0;
-    color: var(--mh-gold);
-    text-transform: uppercase;
+    font-size: 2rem;
+    color: var(--gold);
     letter-spacing: 2px;
-    font-size: 1.8rem;
+    text-transform: uppercase;
 }
 
-/* 4. NAVEGACIÓN (Siguiendo tu modelo de menú) */
+/* NAV */
 nav {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 nav a {
     color: var(--text);
     text-decoration: none;
-    margin: 0 15px;
+    margin: 0 12px;
     font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 6px;
     transition: var(--transition);
 }
 
 nav a:hover {
-    color: var(--mh-gold-bright);
+    color: var(--gold-bright);
+    background: rgba(255,255,255,0.05);
 }
 
-/* 5. CONTENEDOR PRINCIPAL */
+/* 4. MAIN */
 main {
     max-width: 1200px;
-    margin: 20px auto;
-    padding: 0 20px;
-    /* Quitamos el grid de aquí para que no afecte a todas las páginas por igual */
+    margin: 25px auto;
+    padding: 20px;
 }
 
-/* 6. PIE DE PÁGINA */
+/* 5. FOOTER */
 footer {
-    text-align: center;
-    padding: 2rem;
-    font-size: 0.9rem;
-    color: #666;
-    border-top: 1px solid var(--mh-gray);
     margin-top: 40px;
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
 }
 
-/* 7. RESPONSIVE (Human-Centric) */
+/* 6. RESPONSIVE */
 @media (max-width: 768px) {
-    main {
-        grid-template-columns: 1fr; /* En móvil, todo en una columna */
-    }
-    
     header h1 {
         font-size: 1.4rem;
+    }
+    nav a {
+        margin: 0 6px;
     }
 }
