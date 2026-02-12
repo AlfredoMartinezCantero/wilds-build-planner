@@ -1,20 +1,25 @@
 <?php include "../inc/cabecera.php"; ?>
 
-<main style="display: block; text-align: center;">
-    <section id="hero">
-        <h1>Bienvenido a MH Wilds Builder</h1>
-        <p>La herramienta definitiva para optimizar tu equipo de cazador.</p>
-        
-        <div style="margin-top: 50px;">
-            <a href="planner.php" style="background: var(--mh-gold); color: black; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px;">
-                IR AL PLANIFICADOR DE BUILDS
-            </a>
-        </div>
+<main>
+
+    <!-- HERO PRINCIPAL -->
+    <section id="hero" class="hero-modern">
+        <h1 class="title-hero">MH Wilds Builder</h1>
+        <p class="subtitle-hero">
+            La herramienta definitiva para optimizar tu equipo de cazador.
+        </p>
+
+        <a href="planner.php" class="btn-hero">
+            Ir al Planificador de Builds
+        </a>
     </section>
 
-    <section id="noticias" style="margin-top: 100px;">
+    <!-- SECCIÓN NOTICIAS -->
+    <section id="noticias" class="noticias-modern">
         <h2>Últimas Noticias</h2>
+        <p class="texto-noticias">Muy pronto añadiremos novedades del juego y actualizaciones del planner.</p>
     </section>
+
 </main>
 
 <?php include "../inc/pie.php"; ?>
