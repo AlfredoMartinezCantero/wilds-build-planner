@@ -1,7 +1,3 @@
-/* =======================================
-   ESTILO GLOBAL MODERNO – MH WILDS BUILDER
-   ======================================= */
-
 /* 1. PALETA DE COLORES */
 :root {
     --bg-dark: #0e0e10;
@@ -94,9 +90,7 @@ footer {
     }
 }
 
-/* ================================
-   HERO MODERNO – PÁGINA DE INICIO
-   ================================ */
+/* PÁGINA DE INICIO */
 
 .hero-modern {
     text-align: center;
@@ -138,9 +132,7 @@ footer {
     transform: translateY(-3px);
 }
 
-/* ================================
-   SECCIÓN NOTICIAS
-   ================================ */
+/* NOTICIAS */
 
 .noticias-modern {
     text-align: center;
