@@ -11,7 +11,7 @@
 
 <body>
 <nav>
-    <a href="index.php">Inicio</a>
-    <a href="planner.php">Planificador de Builds</a>
-    <a href="admin/index.php">Panel Admin</a>
+    <a href="../front/index.php">Inicio</a>
+    <a href="../front/planner.php">Planificador de Builds</a>
+    <a href="../admin/index.php">Panel Admin</a>
 </nav>

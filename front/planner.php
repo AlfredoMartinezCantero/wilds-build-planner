@@ -8,7 +8,7 @@
 
     /**
      * Renderiza un bloque de pieza de equipo (arma o armadura)
-     * 
+     * Renderiza un arma o armadura
      * @param string $icono          Nombre del archivo de icono (sin .png)
      * @param string $etiqueta       Texto descriptivo ("Arma", "Casco", etc.)
      * @param string $nameSelect     Atributo name del <select>

@@ -153,3 +153,66 @@ footer {
     color: var(--text-muted);
     font-size: 1rem;
 }
+
+/* =============== ADMIN PANEL =============== */
+
+.panel-admin {
+    padding: 30px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.panel-admin h1 {
+    color: var(--gold);
+    margin-bottom: 20px;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.admin-card {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 10px var(--shadow);
+    transition: var(--transition);
+}
+
+.admin-card:hover {
+    border-color: var(--gold-bright);
+    transform: translateY(-3px);
+}
+
+.admin-table {
+    width: 100%;
+    margin-top: 25px;
+    border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.btn-delete {
+    padding: 6px 12px;
+    background: #b32727;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn-delete:hover {
+    background: #e04848;
+}
