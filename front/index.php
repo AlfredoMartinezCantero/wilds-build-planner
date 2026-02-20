@@ -17,7 +17,7 @@
     <!-- SECCIÓN NOTICIAS -->
     <section id="noticias" class="noticias-modern">
         <h2>Últimas Noticias</h2>
-        <p class="texto-noticias">Muy pronto añadiremos novedades del juego y actualizaciones del planner.</p>
+        <p class="texto-noticias">Muy pronto se añadirán novedades del juego y actualizaciones del planner.</p>
     </section>
 
 </main>
