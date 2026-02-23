@@ -1,6 +1,7 @@
 <?php
 include "../inc/cabecera.php";
 include "../inc/conectar.php";
+include "proteger.php";
 ?>
 <link rel="stylesheet" href="../front/css/estilo.css">
 <main>

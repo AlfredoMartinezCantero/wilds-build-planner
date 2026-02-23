@@ -1,5 +1,6 @@
 <?php
 include "../inc/cabecera.php";
+include "proteger.php";
 ?>
 <link rel="stylesheet" href="../front/css/estilo.css">
 

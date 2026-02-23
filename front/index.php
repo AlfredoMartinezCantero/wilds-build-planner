@@ -1,4 +1,6 @@
-<?php include "../inc/cabecera.php"; ?>
+<?php include "../inc/cabecera.php"; 
+include "../inc/sesion.php";
+?>
 
 <main>
 

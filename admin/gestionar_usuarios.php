@@ -1,6 +1,7 @@
 <?php
 include "../inc/cabecera.php";
 include "../inc/conectar.php";
+include "proteger.php";
 ?>
 
 <link rel="stylesheet" href="../front/css/estilo.css">
@@ -29,6 +30,10 @@ include "../inc/conectar.php";
                     <td><?= $u['email'] ?></td>
                     <td><?= $u['fecha_registro'] ?></td>
                     <td>
+                        back/php/admin_actions.php?action=delete_user&id=<?= $u['id'] ?>" class="btn-delete">Eliminar</a>
+                    </td>
+                    <td>
+                        admin/editar_usuario.php?id=<?= $u['id'] ?>" class="btn-edit">Editar</a>
                         back/php/admin_actions.php?action=delete_user&id=<?= $u['id'] ?>" class="btn-delete">Eliminar</a>
                     </td>
                 </tr>

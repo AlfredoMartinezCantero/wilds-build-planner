@@ -13,5 +13,21 @@
 <nav>
     <a href="../front/index.php">Inicio</a>
     <a href="../front/planner.php">Planificador de Builds</a>
-    <a href="../admin/index.php">Panel Admin</a>
+    <?php 
+        include_once "sesion.php"; 
+        if(isset($_SESSION['id_usuario'])):
+    ?>
+        <!-- Usuario logeado -->
+        logout.php">Cerrar sesión</a>
+
+        <?php if($_SESSION['rol'] === 'admin'): ?>
+            ../admin/index.php">Panel Admin</a>
+        <?php endif; ?>
+
+    <?php else: ?>
+        <!-- Usuario no logeado -->
+        <a href="login.php">Iniciar sesión</a>
+        <a href="register.php">Registrarse</a>
+    <?php endif; ?>
+
 </nav>
