@@ -14,3 +14,6 @@ CREATE TABLE armaduras (
     habilidades JSON,
     imagen VARCHAR(255)
 );
+
+/* ----------------------- */
+
