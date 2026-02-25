@@ -37,7 +37,7 @@
     filter: drop-shadow(0 0 4px rgba(0,0,0,0.5));
 }
 
-/* Select moderno */
+/* Select */
 .info-pieza select {
     flex: 1;
     padding: 12px;

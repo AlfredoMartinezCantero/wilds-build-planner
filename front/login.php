@@ -25,7 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit;
         }
     }
-
     $error = "Usuario o contraseña incorrectos";
 }
 ?>
@@ -51,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <p style="margin-top:20px;">
         ¿No tienes cuenta?
-        front/register.phpregístrate</a>
+    <a href="../front/register.php">Regístrate</a>
     </p>
 
 </main>

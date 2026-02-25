@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <p style="margin-top:20px;">
         ¿Ya tienes cuenta?
-        front/login.phpInicia sesión</a>
+        <a href="../front/login.php">Inicia sesión</a>
     </p>
 
 </main>
