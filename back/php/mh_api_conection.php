@@ -5,6 +5,8 @@
     2.1- Dentro de la función hay que concatenar la base URL con el endpoint (weapons, etc) y los params (?limit=10&offset=0)
     2.2- Hacer la petición Get a la URL recuperando la respuesta devuelta 
     2.3- Convertir el JSON en un array php y mostrar el resultado por consola (por ahora)
+
+    Crear script de python que reciba el json(entrada) y cree tablas sql(salida) ORM json a sql
 -->
  
 <?php
