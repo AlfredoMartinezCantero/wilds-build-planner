@@ -91,3 +91,14 @@
     background: var(--bg-card);
     border-radius: 6px;
 }
+
+.weapon-selects {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.weapon-selects select {
+    width: 100%;
+}

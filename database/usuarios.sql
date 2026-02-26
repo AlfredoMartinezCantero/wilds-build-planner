@@ -1,9 +1,20 @@
-CREATE TABLE usuarios (
+DROP TABLE IF EXISTS profiles;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_usuario VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    email VARCHAR(190) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    role ENUM('admin','editor','user') NOT NULL DEFAULT 'user',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-ALTER TABLE usuarios ADD rol ENUM('admin','usuario') DEFAULT 'usuario';
+CREATE INDEX idx_users_email ON users(email);
+
+CREATE TABLE profiles (
+    user_id INT PRIMARY KEY,
+    nickname VARCHAR(60),
+    hunter_rank INT DEFAULT 1,
+    prefs_json JSON NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);

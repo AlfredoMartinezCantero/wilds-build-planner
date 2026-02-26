@@ -1,16 +1,14 @@
 <?php
-    $servidor = "localhost";
-    $usuario = "alfredo"; 
-    $password = "Wilds2025$"; 
-    $base_de_datos = "wilds_planner";
+$host = "localhost";
+$user = "wildsplanner";        
+$pass = "Wildsplanner123$";   
+$db   = "wildsplanner";
 
-    $conexion = mysqli_connect($servidor, $usuario, $password, $base_de_datos);
+$conexion = new mysqli($host, $user, $pass, $db);
 
-    // Verificación (Human-centric: si falla, queremos saber por qué)
-    if (!$conexion) {
-        die("Error de conexión: " . mysqli_connect_error());
-    }
-    
-    // Configuramos el idioma para que las tildes de las armas se vean bien
-    mysqli_set_charset($conexion, "utf8mb4");
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
+}
+
+$conexion->set_charset("utf8mb4");
 ?>
