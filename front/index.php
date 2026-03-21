@@ -17,10 +17,33 @@ include "../inc/sesion.php";
     </section>
 
     <!-- SECCIÓN NOTICIAS -->
-    <section id="noticias" class="noticias-modern">
-        <h2>Últimas Noticias</h2>
-        <p class="texto-noticias">Muy pronto se añadirán novedades del juego y actualizaciones del planner.</p>
-    </section>
+<section class="noticias-modern">
+
+    <h2>Últimas Noticias</h2>
+
+    <div class="noticia-card">
+        <div class="noticia-img">
+            <img src="img/mh-official.jpg" alt="Monster Hunter Official">
+        </div>
+
+        <div class="noticia-texto">
+            <h3>¿Te gusta Monster Hunter?</h3>
+            <p>
+                Si estás interesado en los juegos de la saga, te recomiendo visitar la web oficial. 
+                Descubre novedades, monstruos, armas y todo el contenido exclusivo.
+            </p>
+
+            <a href="https://www.monsterhunter.com/" 
+               target="_blank" 
+               class="btn-mh"
+               style="margin-top:10px; display:inline-block;">
+                Visitar web oficial →
+            </a>
+        </div>
+    </div>
+
+</section>
+
 
 </main>
 

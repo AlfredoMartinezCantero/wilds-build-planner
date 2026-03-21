@@ -1,5 +1,5 @@
 <?php
-include "../inc/sesion.php";
+require_once __DIR__ . "/../inc/sesion.php";
 include "../inc/conectar.php";
 
 $error = "";

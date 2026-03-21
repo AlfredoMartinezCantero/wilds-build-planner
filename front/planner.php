@@ -86,6 +86,29 @@
 ?>
 
 <main>
+    <form action="../back/php/save_build.php" method="POST">
+    
+    <section style="margin-bottom:20px; background:var(--bg-panel); padding:15px; border-radius:10px;">
+        <h2 style="color:var(--gold); margin-bottom:10px;">Datos de la build</h2>
+
+        <div class="form-group">
+            <label>Título de la build</label>
+            <input type="text" name="titulo" placeholder="Ej: Build Espada larga de fuego">
+        </div>
+
+        <div class="form-group">
+            <label>Notas</label>
+            <textarea name="notas" rows="3" placeholder="Notas rápidas de la build"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label class="checkbox-publica">
+                <input type="checkbox" name="es_publica" value="1">
+                Hacer pública esta build
+            </label>
+        </div>
+    </section>
+
     <section id="planner">
         <div id="grid-armadura">
 
@@ -191,11 +214,16 @@
         </div>
     </section>
 
+   
     <aside id="stats-panel">
         <h2>Estadísticas Totales</h2>
         <div id="total-ataque">Ataque: 0</div>
         <div id="total-defensa">Defensa: 0</div>
     </aside>
+
+    <button type="submit" class="btn-guardar-build">Guardar Build</button>
+
+</form>
 </main>
 
 <!-- JS específico del planner: rellena las armas según el tipo elegido -->
@@ -204,7 +232,6 @@
     const ARMAS_POR_TIPO = <?php echo json_encode($armasPorTipo, JSON_UNESCAPED_UNICODE); ?>;
     console.log('ARMAS_POR_TIPO:', ARMAS_POR_TIPO);
     
-
     /* 
     Inicializa el comportamiento de selects (arma + arma concreta)
     dentro de un contenedor dado por su ID (weapon-main o weapon-sub)

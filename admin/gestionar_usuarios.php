@@ -1,46 +1,73 @@
 <?php
-include "../inc/cabecera.php";
-include "../inc/conectar.php";
-include "proteger.php";
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+require_once __DIR__ . '/../inc/sesion.php';
+require_once __DIR__ . '/../inc/conectar.php';
+
+// SOLO ADMIN
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+    die("Acceso denegado.");
+}
+
+// Cargar usuarios + perfiles
+$sql = "
+    SELECT u.id, u.email, u.role, u.created_at,
+           p.nickname, p.hunter_rank
+    FROM users u
+    LEFT JOIN profiles p ON p.user_id = u.id
+    ORDER BY u.created_at DESC
+";
+
+$res = $conexion->query($sql);
+if (!$res) {
+    die("Error al cargar usuarios: " . $conexion->error);
+}
+
+include __DIR__ . '/../inc/cabecera.php';
 ?>
-
 <link rel="stylesheet" href="../front/css/estilo.css">
+<main class="panel-admin">
+    <h1>Gestión de Usuarios</h1>
 
-<main>
-    <section class="panel-admin">
-        <h1>Gestión de Usuarios</h1>
+    <table class="admin-table">
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Nickname</th>
+            <th>HR</th>
+            <th>Rol</th>
+            <th>Registro</th>
+            <th>Acciones</th>
+        </tr>
 
-        <?php
-        $resultado = mysqli_query($conexion, "SELECT * FROM usuarios ORDER BY fecha_registro DESC");
-        ?>
-
-        <table class="admin-table">
+        <?php while ($u = $res->fetch_assoc()): ?>
             <tr>
-                <th>ID</th>
-                <th>Usuario</th>
-                <th>Email</th>
-                <th>Fecha registro</th>
-                <th>Acciones</th>
+                <td><?= $u['id'] ?></td>
+                <td><?= htmlspecialchars($u['email']) ?></td>
+                <td><?= htmlspecialchars($u['nickname'] ?: "—") ?></td>
+                <td><?= (int)$u['hunter_rank'] ?></td>
+                <td><?= htmlspecialchars($u['role']) ?></td>
+                <td><?= $u['created_at'] ?></td>
+
+                <td>
+                    <!-- Editar usuario -->
+                    editar_usuarios.php?id=<?= $u['id'] ?>" 
+                       class="btn-mh">Editar</a>
+
+                    <!-- Eliminar usuario -->
+                    ../back/php/admin_actions.php
+                        <input type="hidden" name="action" value="delete_user">
+                        <input type="hidden" name="id" value="<?= $u['id'] ?>">
+                        <button type="submit" class="btn-delete-build">
+                            Eliminar
+                        </button>
+                    </form>
+                </td>
             </tr>
+        <?php endwhile; ?>
 
-            <?php while($u = mysqli_fetch_assoc($resultado)): ?>
-                <tr>
-                    <td><?= $u['id'] ?></td>
-                    <td><?= $u['nombre_usuario'] ?></td>
-                    <td><?= $u['email'] ?></td>
-                    <td><?= $u['fecha_registro'] ?></td>
-                    <td>
-                        back/php/admin_actions.php?action=delete_user&id=<?= $u['id'] ?>" class="btn-delete">Eliminar</a>
-                    </td>
-                    <td>
-                        admin/editar_usuario.php?id=<?= $u['id'] ?>" class="btn-edit">Editar</a>
-                        back/php/admin_actions.php?action=delete_user&id=<?= $u['id'] ?>" class="btn-delete">Eliminar</a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
-
-        </table>
-    </section>
+    </table>
 </main>
 
-<?php include "../inc/pie.php"; ?>
+<?php include __DIR__ . '/../inc/pie.php'; ?>
