@@ -11,9 +11,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
 
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
-/* ===============================
-   ACTUALIZAR USUARIO + PERFIL
-   =============================== */
+/* ACTUALIZAR USUARIO + PERFIL */
 if ($action === 'update_user') {
 
     $id = (int)$_POST['id'];
@@ -42,9 +40,7 @@ if ($action === 'update_user') {
     exit;
 }
 
-/* ===============================
-   ELIMINAR USUARIO
-   =============================== */
+/* ELIMINAR USUARIO */
 if ($action === 'delete_user') {
     $id = (int)$_POST['id'];
 
@@ -55,9 +51,7 @@ if ($action === 'delete_user') {
     exit;
 }
 
-/* ===============================
-   ELIMINAR BUILD
-   =============================== */
+/* ELIMINAR BUILD */
 if ($action === 'delete_build') {
     $id = (int)$_POST['id'];
 

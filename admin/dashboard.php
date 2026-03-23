@@ -10,9 +10,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
     die("Acceso denegado.");
 }
 
-/* ===========================
-   MÉTRICAS PRINCIPALES
-   =========================== */
+/* MÉTRICAS PRINCIPALES */
 
 // Nº usuarios
 $total_usuarios = $conexion->query("SELECT COUNT(*) AS c FROM users")->fetch_assoc()['c'];
@@ -28,9 +26,7 @@ $hoy = date("Y-m-d");
 $builds_hoy = $conexion->query("SELECT COUNT(*) AS c FROM builds WHERE DATE(created_at) = '$hoy'")->fetch_assoc()['c'];
 
 
-/* ===========================
-   GRÁFICO: Builds por día (últimos 7 días)
-   =========================== */
+/* GRÁFICO: Builds por día (últimos 7 días) */
 
 $sqlDias = "
     SELECT DATE(created_at) AS dia, COUNT(*) AS cantidad
@@ -54,16 +50,12 @@ $labels_dias = array_reverse($labels_dias);
 $data_dias = array_reverse($data_dias);
 
 
-/* ===========================
-   GRÁFICO: Públicas vs Privadas
-   =========================== */
+/* GRÁFICO: Públicas vs Privadas */
 
 $privadas = $total_builds - $builds_publicas;
 
 
-/* ===========================
-   TABLA RESUMEN
-   =========================== */
+/* TABLA RESUMEN */
 
 // Últimas builds
 $ultimas_builds = $conexion->query("

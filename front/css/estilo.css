@@ -90,7 +90,7 @@ footer {
     }
 }
 
-/* PÁGINA DE INICIO */
+/* Página de inicio */
 
 .hero-modern {
     text-align: center;
@@ -132,7 +132,7 @@ footer {
     transform: translateY(-3px);
 }
 
-/* NOTICIAS */
+/* Noticias */
 
 .noticias-modern {
     text-align: center;
@@ -154,7 +154,7 @@ footer {
     font-size: 1rem;
 }
 
-/* =============== ADMIN PANEL =============== */
+/* Panel de admin */
 
 .panel-admin {
     padding: 30px;
@@ -217,7 +217,7 @@ footer {
     background: #e04848;
 }
 
-/* ========== FORMULARIOS LOGIN / REGISTRO ========== */
+/* Formularios login / registro */
 
 .form-container {
     width: 420px;
@@ -396,8 +396,8 @@ footer {
     transform: translateY(-2px);
 }
 
-/* ========== MODO CLARO ========== */
-/* Cuando el body tenga la clase .theme-light, se sobreescriben las variables de color */
+/* Modo claro */
+/* Cuando el body tenga la clase .theme-light, sobreescribe las variables de color */
 
 body.theme-light {
     --bg-dark: #f3f3f5;
@@ -409,7 +409,7 @@ body.theme-light {
     --shadow: rgba(0, 0, 0, 0.10);
 }
 
-/* Ajustes para modo claro en cabecera y footer si quieres mejorar contraste */
+/* Ajustes para modo claro en cabecera y footer */
 body.theme-light header {
     background: linear-gradient(180deg, #ffffff 0%, #f3f3f5 100%);
     border-bottom-color: var(--gold);
@@ -419,9 +419,7 @@ body.theme-light footer {
     border-top-color: var(--border);
 }
 
-/* ===========================
-   EASTER EGG: RATHALOS
-   =========================== */
+/* Easter egg del rathalos */
 
 #rathalos-easter {
     position: fixed;

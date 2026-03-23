@@ -65,7 +65,7 @@ include __DIR__ . "/../inc/cabecera.php";
 <?= htmlspecialchars($prefs); ?>
         </pre>
         <?php
-// ================= HISTORIAL DE BUILDS DEL USUARIO =================
+// Historial de builds del usuario
 $sqlStats = "
     SELECT 
         COUNT(*) AS total,

@@ -15,7 +15,7 @@ if ($user_id <= 0) {
     die("ID de usuario inválido.");
 }
 
-// Cargar usuario (tabla users)
+// Cargar usuario
 $sqlUser = "SELECT * FROM users WHERE id=$user_id";
 $resUser = $conexion->query($sqlUser);
 if (!$resUser || $resUser->num_rows === 0) {

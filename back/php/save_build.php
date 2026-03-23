@@ -19,7 +19,7 @@ $notas  = $conexion->real_escape_string($_POST['notas'] ?? '');
 $public = isset($_POST['es_publica']) ? 1 : 0;
 
 if ($build_id > 0) {
-    // 🔁 MODO ACTUALIZAR: solo actualizar datos básicos de una build existente del usuario
+    // Actualizaciones: solo actualizar datos básicos de una build existente del usuario
     $sqlUpdate = "UPDATE builds 
                   SET titulo = '$titulo',
                       notas = '$notas',
@@ -34,9 +34,9 @@ if ($build_id > 0) {
     exit;
 }
 
-// 🆕 MODO CREAR: insertar nueva build + items del planner
+// Crear: insertar nueva build + items del planner
 
-// 1) Insertar en tabla builds
+// Insertar en tabla builds
 $sqlBuild = "INSERT INTO builds (user_id, titulo, notas, es_publica)
              VALUES ($user_id, '$titulo', '$notas', $public)";
 
@@ -46,7 +46,7 @@ if (!$conexion->query($sqlBuild)) {
 
 $build_id = $conexion->insert_id;
 
-// 2) Recoger IDs seleccionados en el planner
+// Recoger IDs seleccionados en el planner
 $weapon_main_id = (int)($_POST['weapon_main_id'] ?? 0);
 $weapon_sub_id  = (int)($_POST['weapon_sub_id'] ?? 0);
 
@@ -56,7 +56,7 @@ $gloves_id = (int)($_POST['select-gloves'] ?? 0);
 $waist_id  = (int)($_POST['select-waist']  ?? 0);
 $legs_id   = (int)($_POST['select-legs']   ?? 0);
 
-// 3) Función para insertar en build_items
+// Función para insertar en build_items
 function insertarItem($conexion, $build_id, $item_id, $position, $type) {
     if ($item_id <= 0) return;
 
@@ -71,17 +71,17 @@ function insertarItem($conexion, $build_id, $item_id, $position, $type) {
     }
 }
 
-// 4) Guardar arma principal y secundaria
+// Guardar arma principal y secundaria
 insertarItem($conexion, $build_id, $weapon_main_id, 'weapon_main', 'weapon');
 insertarItem($conexion, $build_id, $weapon_sub_id,  'weapon_sub',  'weapon');
 
-// 5) Guardar armaduras
+// Guardar armaduras
 insertarItem($conexion, $build_id, $head_id,   'head',   'armor');
 insertarItem($conexion, $build_id, $chest_id,  'chest',  'armor');
 insertarItem($conexion, $build_id, $gloves_id, 'arms',   'armor');
 insertarItem($conexion, $build_id, $waist_id,  'waist',  'armor');
 insertarItem($conexion, $build_id, $legs_id,   'legs',   'armor');
 
-// 6) Volver a Mis Builds
+// Volver a Mis Builds
 header("Location: ../../front/mis_builds.php");
 exit;

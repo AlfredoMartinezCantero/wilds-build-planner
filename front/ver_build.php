@@ -15,7 +15,7 @@ if ($build_id <= 0) {
     die("Build no válida.");
 }
 
-// 1) Cargar datos de la build
+// Cargar datos de la build
 $sqlBuild = "
     SELECT b.*, u.email 
     FROM builds b
@@ -31,7 +31,7 @@ if (!$build) {
     die("La build no existe.");
 }
 
-// 2) Cargar items de la build
+// Cargar items de la build
 $sqlItems = "
     SELECT item_type, item_ref_id, position
     FROM build_items
@@ -54,14 +54,14 @@ $slots = [
     'charm'       => ['label' => 'Amuleto',         'data' => null],
 ];
 
-// 3) Resolver cada item (arma/armadura) contra su tabla
+// Resolver cada item (arma/armadura) contra su tabla
 while ($row = $resItems->fetch_assoc()) {
     $position = $row['position'];
     $type     = $row['item_type'];
     $ref_id   = (int)$row['item_ref_id'];
 
     if (!isset($slots[$position])) {
-        continue; // posición que no estamos mostrando aún
+        continue; // posición que aun no se muestra
     }
 
     $nombre = null;
@@ -76,10 +76,10 @@ while ($row = $resItems->fetch_assoc()) {
         $sql = "SELECT nombre, tipo FROM armaduras WHERE id = $ref_id";
         $res = $conexion->query($sql);
         if ($res && $armadura = $res->fetch_assoc()) {
-            $nombre = $armadura['nombre']; // si quieres, puedes añadir " (head/chest...)"
+            $nombre = $armadura['nombre']; 
         }
     } else {
-        // Otros tipos futuros: jewel, charm...
+        // Otros tipos futuros
         $nombre = "Item #$ref_id ($type)";
     }
 
