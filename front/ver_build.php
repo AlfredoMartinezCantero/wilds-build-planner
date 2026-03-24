@@ -44,14 +44,14 @@ if (!$resItems) {
 
 // Estructura para guardar los slots
 $slots = [
-    'weapon_main' => ['label' => 'Arma principal',  'data' => null],
-    'weapon_sub'  => ['label' => 'Arma secundaria','data' => null],
-    'head'        => ['label' => 'Casco',           'data' => null],
-    'chest'       => ['label' => 'Pechera',         'data' => null],
-    'arms'        => ['label' => 'Brazales',        'data' => null],
-    'waist'       => ['label' => 'Faja',            'data' => null],
-    'legs'        => ['label' => 'Piernas',         'data' => null],
-    'charm'       => ['label' => 'Amuleto',         'data' => null],
+    'weapon_main' => ['label' => $LANG['weapon_main'] ?? 'Arma principal',  'data' => null],
+    'weapon_sub'  => ['label' => $LANG['weapon_sub'] ?? 'Arma secundaria','data' => null],
+    'head'        => ['label' => $LANG['helmet'] ?? 'Casco',           'data' => null],
+    'chest'       => ['label' => $LANG['chest'] ?? 'Pechera',         'data' => null],
+    'arms'        => ['label' => $LANG['gloves'] ?? 'Brazales',        'data' => null],
+    'waist'       => ['label' => $LANG['waist'] ?? 'Faja',            'data' => null],
+    'legs'        => ['label' => $LANG['legs'] ?? 'Piernas',         'data' => null],
+    'charm'       => ['label' => $LANG['charm'] ?? 'Amuleto',         'data' => null],
 ];
 
 // Resolver cada item (arma/armadura) contra su tabla
@@ -97,16 +97,16 @@ include __DIR__ . "/../inc/cabecera.php";
             <?= htmlspecialchars($build['titulo']); ?>
         </h2>
 
-        <p><strong>Notas:</strong><br><?= nl2br(htmlspecialchars($build['notas'] ?? "")); ?></p>
+        <p><strong><?php echo htmlspecialchars($LANG['notes'] ?? 'Notas'); ?>:</strong><br><?= nl2br(htmlspecialchars($build['notas'] ?? "")); ?></p>
 
-        <p><strong>Visibilidad:</strong> <?= $build['es_publica'] ? "Pública" : "Privada"; ?></p>
+        <p><strong><?php echo htmlspecialchars($LANG['visibility'] ?? 'Visibilidad'); ?>:</strong> <?= $build['es_publica'] ? htmlspecialchars($LANG['public'] ?? 'Pública') : htmlspecialchars($LANG['private'] ?? 'Privada'); ?></p>
 
         <?php $monstruo = $build['target_monster'] ?? ""; ?>
-        <p><strong>Monstruo objetivo:</strong> <?= $monstruo !== "" ? htmlspecialchars($monstruo) : "Ninguno"; ?></p>
+        <p><strong><?php echo htmlspecialchars($LANG['target_monster'] ?? 'Monstruo objetivo'); ?>:</strong> <?= $monstruo !== "" ? htmlspecialchars($monstruo) : htmlspecialchars($LANG['none'] ?? 'Ninguno'); ?></p>
 
         <hr style="border-color:var(--border); margin:15px 0;">
 
-        <h3 style="color:var(--gold-bright); margin-bottom:10px;">Equipo</h3>
+        <h3 style="color:var(--gold-bright); margin-bottom:10px;"><?php echo htmlspecialchars($LANG['equipment'] ?? 'Equipo'); ?></h3>
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:10px;">
             <?php foreach ($slots as $key => $slot): ?>
                 <div style="background:var(--bg-card); padding:10px; border-radius:8px;">
@@ -121,7 +121,7 @@ include __DIR__ . "/../inc/cabecera.php";
         </div>
 
         <div style="margin-top:20px;">
-            <a href="mis_builds.php" style="color:var(--gold); text-decoration:none;">Volver</a>
+            <a href="mis_builds.php" style="color:var(--gold); text-decoration:none;"><?php echo htmlspecialchars($LANG['back'] ?? 'Volver'); ?></a>
         </div>
     </div>
 </main>

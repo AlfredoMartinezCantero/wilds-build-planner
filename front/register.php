@@ -51,10 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                      VALUES ($user_id, '$usuario_esc')";
             mysqli_query($conexion, $sql2);
 
-            $mensaje = "Usuario registrado. Ahora puedes iniciar sesión.";
+            $mensaje = $LANG['user_registered'] ?? 'Usuario registrado. Ahora puedes iniciar sesión.';
 
         } else {
-            $mensaje = "Error: el email ya existe.";
+            $mensaje = $LANG['email_exists'] ?? 'Error: el email ya existe.';
         }
     }
 }
@@ -65,11 +65,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <main>
     <div class="form-container">
 
-        <h2>Registro de Usuario</h2>
+        <h2><?php echo htmlspecialchars($LANG['register_title'] ?? 'Registro de Usuario'); ?></h2>
 
         <?php if($mensaje): ?>  <!-- Muestra mensaje de éxito o error si existe -->
             <p style="color:#88ff88;text-align:center;margin-bottom:15px;">
-                <?= $mensaje ?>
+                <?= htmlspecialchars($mensaje) ?>
             </p>
         <?php endif; ?>
         
@@ -77,34 +77,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <form method="POST">
 
             <div class="form-group">
-                <label for="usuario">Nombre del cazador</label>
+                <label for="usuario"><?php echo htmlspecialchars($LANG['hunter_name'] ?? 'Nombre del cazador'); ?></label>
                 <input type="text" id="usuario" name="usuario" required>
             </div>
 
             <div class="form-group">
-                <label for="email">Correo electrónico</label>
+                <label for="email"><?php echo htmlspecialchars($LANG['email'] ?? 'Correo electrónico'); ?></label>
                 <input type="email" id="email" name="email" required>
             </div>
 
             <div class="form-group">
-                <label for="password">Contraseña</label>
+                <label for="password"><?php echo htmlspecialchars($LANG['password'] ?? 'Contraseña'); ?></label>
                 <input type="password" id="password" name="password" required>
                 <div id="password-requisitos" style="margin-top:10px;">
-                <p style="color:var(--text-muted); margin-bottom:8px;">Requisitos de la contraseña:</p>
+                <p style="color:var(--text-muted); margin-bottom:8px;"><?php echo htmlspecialchars($LANG['password_requirements_title'] ?? 'Requisitos de la contraseña:'); ?></p>
                 <ul id="password-checklist" style="list-style:none; padding-left:0; font-size:0.9rem;">
-                    <li id="req-length"   class="req-item">❌ Mínimo 8 caracteres</li>
-                    <li id="req-upper"    class="req-item">❌ Al menos una MAYÚSCULA</li>
-                    <li id="req-lower"    class="req-item">❌ Al menos una minúscula</li>
-                    <li id="req-number"   class="req-item">❌ Al menos un número</li>
-                    <li id="req-special"  class="req-item">❌ Al menos un símbolo especial</li>
+                    <li id="req-length"   class="req-item">❌ <?php echo htmlspecialchars($LANG['password_req_length'] ?? 'Mínimo 8 caracteres'); ?></li>
+                    <li id="req-upper"    class="req-item">❌ <?php echo htmlspecialchars($LANG['password_req_upper'] ?? 'Al menos una MAYÚSCULA'); ?></li>
+                    <li id="req-lower"    class="req-item">❌ <?php echo htmlspecialchars($LANG['password_req_lower'] ?? 'Al menos una minúscula'); ?></li>
+                    <li id="req-number"   class="req-item">❌ <?php echo htmlspecialchars($LANG['password_req_number'] ?? 'Al menos un número'); ?></li>
+                    <li id="req-special"  class="req-item">❌ <?php echo htmlspecialchars($LANG['password_req_special'] ?? 'Al menos un símbolo especial'); ?></li>
                 </ul>
 </div>
-        <button type="submit">Registrarse</button>
+        <button type="submit"><?php echo htmlspecialchars($LANG['register'] ?? 'Registrarse'); ?></button>
         </form>
 
         <div class="bottom-text">
-            ¿Ya tienes cuenta?
-            <a href="../front/login.php">Inicia sesión</a>
+            <?php echo htmlspecialchars($LANG['have_account'] ?? '¿Ya tienes cuenta?'); ?>
+            <a href="../front/login.php"><?php echo htmlspecialchars($LANG['login_link'] ?? 'Inicia sesión'); ?></a>
         </div>
 
     </div>
@@ -117,16 +117,25 @@ document.getElementById("password").addEventListener("input", function () {
     const p = this.value;
     const rules = document.getElementById("password-rules");
 
+    const msg = {
+        length: "<?php echo htmlspecialchars($LANG['password_req_length'] ?? 'Mínimo 8 caracteres'); ?>",
+        upper: "<?php echo htmlspecialchars($LANG['password_req_upper'] ?? 'Al menos una MAYÚSCULA'); ?>",
+        lower: "<?php echo htmlspecialchars($LANG['password_req_lower'] ?? 'Al menos una minúscula'); ?>",
+        number: "<?php echo htmlspecialchars($LANG['password_req_number'] ?? 'Al menos un número'); ?>",
+        special: "<?php echo htmlspecialchars($LANG['password_req_special'] ?? 'Al menos un símbolo especial'); ?>",
+        strong: "<?php echo htmlspecialchars($LANG['password_strong'] ?? 'Contraseña fuerte'); ?>"
+    };
+
     let ok = true;
     let html = "";
 
-    if (p.length < 8) { ok=false; html += "• Min. 8 caracteres<br>"; }
-    if (!/[A-Z]/.test(p)) { ok=false; html += "• Necesita una mayúscula<br>"; }
-    if (!/[a-z]/.test(p)) { ok=false; html += "• Necesita una minúscula<br>"; }
-    if (!/[0-9]/.test(p)) { ok=false; html += "• Necesita un número<br>"; }
-    if (!/[\W_]/.test(p)) { ok=false; html += "• Necesita un símbolo<br>"; }
+    if (p.length < 8) { ok = false; html += `• ${msg.length}<br>`; }
+    if (!/[A-Z]/.test(p)) { ok = false; html += `• ${msg.upper}<br>`; }
+    if (!/[a-z]/.test(p)) { ok = false; html += `• ${msg.lower}<br>`; }
+    if (!/[0-9]/.test(p)) { ok = false; html += `• ${msg.number}<br>`; }
+    if (!/[\W_]/.test(p)) { ok = false; html += `• ${msg.special}<br>`; }
 
-    rules.innerHTML = html || "✔ Contraseña fuerte";
+    rules.innerHTML = html || `✔ ${msg.strong}`;
     rules.style.color = html ? "var(--text-muted)" : "var(--gold-bright)";
 });
 </script>

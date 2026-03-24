@@ -7,7 +7,7 @@ require_once __DIR__ . '/../inc/conectar.php';
 
 // Solo administradores
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
-    die("Acceso denegado.");
+    die(htmlspecialchars($LANG['admin_access_denied'] ?? 'Acceso denegado.'));
 }
 
 // Cargar todas las builds con datos del usuario y perfil
@@ -30,16 +30,16 @@ include __DIR__ . '/../inc/cabecera.php';
 ?>
 <link rel="stylesheet" href="../front/css/estilo.css">
 <main class="panel-admin">
-    <h1 style="color:var(--gold);">Moderar Builds</h1>
+    <h1 style="color:var(--gold);"><?php echo htmlspecialchars($LANG['admin_moderate'] ?? 'Moderar Builds'); ?></h1>
 
     <table class="admin-table">
         <tr>
             <th>ID</th>
-            <th>Título</th>
-            <th>Usuario</th>
-            <th>Pública</th>
-            <th>Fecha</th>
-            <th>Acciones</th>
+            <th><?php echo htmlspecialchars($LANG['admin_title'] ?? 'Título'); ?></th>
+            <th><?php echo htmlspecialchars($LANG['account'] ?? 'Usuario'); ?></th>
+            <th><?php echo htmlspecialchars($LANG['admin_is_public'] ?? 'Pública'); ?></th>
+            <th><?php echo htmlspecialchars($LANG['date'] ?? 'Fecha'); ?></th>
+            <th><?php echo htmlspecialchars($LANG['admin_actions'] ?? 'Acciones'); ?></th>
         </tr>
 
         <?php while ($b = $res->fetch_assoc()): ?>
@@ -55,7 +55,7 @@ include __DIR__ . '/../inc/cabecera.php';
                     </span>
                 </td>
 
-                <td><?= $b['es_publica'] ? "Sí" : "No" ?></td>
+                <td><?= $b['es_publica'] ? htmlspecialchars($LANG['public'] ?? 'Sí') : htmlspecialchars($LANG['private'] ?? 'No'); ?></td>
 
                 <td><?= $b['created_at'] ?></td>
 
@@ -64,7 +64,7 @@ include __DIR__ . '/../inc/cabecera.php';
                     <!-- Ver equipamiento -->
                     <a href="../front/ver_build.php?id=<?= $b['id'] ?>" class="btn-mh"
                        style="padding:6px 12px; font-size:0.9rem;">
-                        Ver
+                        <?php echo htmlspecialchars($LANG['admin_view'] ?? 'Ver'); ?>
                     </a>
 
                     <!-- Eliminar build -->
@@ -72,8 +72,9 @@ include __DIR__ . '/../inc/cabecera.php';
                         <input type="hidden" name="action" value="delete_build">
                         <input type="hidden" name="id" value="<?= $b['id'] ?>">
                         <button type="submit" class="btn-delete-build" 
-                                style="padding:6px 12px; font-size:0.9rem;">
-                            Eliminar
+                                style="padding:6px 12px; font-size:0.9rem;"
+                                onclick="return confirm('<?php echo htmlspecialchars($LANG['confirm_delete_build'] ?? '¿Estás seguro?'); ?>');">
+                            <?php echo htmlspecialchars($LANG['admin_delete'] ?? 'Eliminar'); ?>
                         </button>
                     </form>
 

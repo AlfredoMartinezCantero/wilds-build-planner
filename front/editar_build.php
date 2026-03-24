@@ -37,18 +37,18 @@ include __DIR__ . "/../inc/cabecera.php";
 
 <main>
     <div class="form-container">
-        <h2>Editar Build</h2>
+        <h2><?php echo htmlspecialchars($LANG['edit_build'] ?? 'Editar Build'); ?></h2>
 
         <form action="../back/php/save_build.php" method="POST">
             <input type="hidden" name="build_id" value="<?= $build['id'] ?>">
 
             <div class="form-group">
-                <label>Título de la build</label>
+                <label><?php echo htmlspecialchars($LANG['build_title'] ?? 'Título de la build'); ?></label>
                 <input type="text" name="titulo" value="<?= htmlspecialchars($build['titulo']); ?>">
             </div>
 
             <div class="form-group">
-                <label>Notas</label>
+                <label><?php echo htmlspecialchars($LANG['notes'] ?? 'Notas'); ?></label>
                 <textarea name="notas" rows="4"><?= htmlspecialchars($build['notas']); ?></textarea>
             </div>
 
@@ -56,15 +56,15 @@ include __DIR__ . "/../inc/cabecera.php";
                 <label class="checkbox-publica">
                     <input type="checkbox" name="es_publica" value="1"
                            <?= $build['es_publica'] ? 'checked' : '' ?>>
-                    Hacer pública esta build
+                    <?php echo htmlspecialchars($LANG['public_build'] ?? 'Hacer pública esta build'); ?>
                 </label>
             </div>
 
-            <button type="submit" class="btn-guardar-build">Guardar cambios</button>
+            <button type="submit" class="btn-guardar-build"><?php echo htmlspecialchars($LANG['save_changes'] ?? 'Guardar cambios'); ?></button>
         </form>
 
         <div class="bottom-text">
-            <a href="mis_builds.php">Volver a Mis Builds</a>
+            <a href="mis_builds.php"><?php echo htmlspecialchars($LANG['back_to_my_builds'] ?? 'Volver a Mis Builds'); ?></a>
         </div>
     </div>
 </main>

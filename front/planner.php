@@ -1,6 +1,7 @@
 <?php
     $css_propio = "planner.css"; 
 
+    include "../inc/sesion.php";
     include "../inc/conectar.php"; 
     include "../inc/funciones.php"; 
 
@@ -89,22 +90,22 @@
     <form action="../back/php/save_build.php" method="POST">
     
     <section style="margin-bottom:20px; background:var(--bg-panel); padding:15px; border-radius:10px;">
-        <h2 style="color:var(--gold); margin-bottom:10px;">Datos de la build</h2>
+        <h2 style="color:var(--gold); margin-bottom:10px;"><?php echo htmlspecialchars($LANG['build_data'] ?? 'Datos de la build'); ?></h2>
 
         <div class="form-group">
-            <label>Título de la build</label>
+            <label><?php echo htmlspecialchars($LANG['build_title'] ?? 'Título de la build'); ?></label>
             <input type="text" name="titulo" placeholder="Ej: Build Espada larga de fuego">
         </div>
 
         <div class="form-group">
-            <label>Notas</label>
+            <label><?php echo htmlspecialchars($LANG['notes'] ?? 'Notas'); ?></label>
             <textarea name="notas" class="planner-notes" placeholder="Notas de la build..."></textarea>
         </div>
 
         <div class="form-group">
             <label class="checkbox-publica">
                 <input type="checkbox" name="es_publica" value="1">
-                Hacer pública esta build
+                <?php echo htmlspecialchars($LANG['public_build'] ?? 'Hacer pública esta build'); ?>
             </label>
         </div>
     </section>
@@ -121,7 +122,7 @@
                     <div class="weapon-selects">
                         <!-- Select de tipo de arma -->
                         <select name="weapon_main_tipo" class="select-tipo-arma">
-                            <option value="">Tipo de arma...</option>
+                            <option value=""><?php echo htmlspecialchars($LANG['select_weapon_type'] ?? 'Tipo de arma...'); ?></option>
                             <?php foreach ($armasPorTipo as $tipo => $lista): ?>
                                 <option value="<?php echo htmlspecialchars($tipo); ?>">
                                     <?php echo htmlspecialchars(labelTipoArma($tipo)); ?>
@@ -131,11 +132,11 @@
 
                         <!-- Select de arma concreta (se rellena por JS) -->
                         <select name="weapon_main_id" class="select-arma">
-                            <option value="">Selecciona arma...</option>
+                            <option value=""><?php echo htmlspecialchars($LANG['select_weapon'] ?? 'Selecciona arma...'); ?></option>
                         </select>
                     </div>
                 </div>
-                <div class="habilidades-mini">Estadísticas arma principal</div>
+                <div class="habilidades-mini"><?php echo htmlspecialchars($LANG['weapon_main_stats'] ?? 'Estadísticas arma principal'); ?></div>
             </div>
 
             <?php
@@ -147,7 +148,7 @@
                     <div class="weapon-selects">
                         <!-- Select de tipo de arma -->
                         <select name="weapon_sub_tipo" class="select-tipo-arma">
-                            <option value="">Tipo de arma...</option>
+                            <option value=""><?php echo htmlspecialchars($LANG['select_weapon_type'] ?? 'Tipo de arma...'); ?></option>
                             <?php foreach ($armasPorTipo as $tipo => $lista): ?>
                                 <option value="<?php echo htmlspecialchars($tipo); ?>">
                                     <?php echo htmlspecialchars(labelTipoArma($tipo)); ?>
@@ -157,11 +158,11 @@
 
                         <!-- Select de arma concreta (se rellena por JS) -->
                         <select name="weapon_sub_id" class="select-arma">
-                            <option value="">Selecciona arma...</option>
+                            <option value=""><?php echo htmlspecialchars($LANG['select_weapon'] ?? 'Selecciona arma...'); ?></option>
                         </select>
                     </div>
                 </div>
-                <div class="habilidades-mini">Estadísticas arma secundaria</div>
+                <div class="habilidades-mini"><?php echo htmlspecialchars($LANG['weapon_sub_stats'] ?? 'Estadísticas arma secundaria'); ?></div>
             </div>
 
             <?php
@@ -221,7 +222,7 @@
         <div id="total-defensa">Defensa: 0</div>
     </aside>
 
-    <button type="submit" class="btn-guardar-build">Guardar Build</button>
+    <button type="submit" class="btn-guardar-build"><?php echo htmlspecialchars($LANG['save_build'] ?? 'Guardar Build'); ?></button>
 
 </form>
 </main>
@@ -230,6 +231,7 @@
 <script>
     // Objeto con las armas agrupadas por tipo, generado desde PHP
     const ARMAS_POR_TIPO = <?php echo json_encode($armasPorTipo, JSON_UNESCAPED_UNICODE); ?>;
+    const SELECT_WEAPON_LABEL = <?php echo json_encode($LANG['select_weapon'] ?? 'Selecciona arma...', JSON_UNESCAPED_UNICODE); ?>;
     console.log('ARMAS_POR_TIPO:', ARMAS_POR_TIPO);
     
     /* 
@@ -254,7 +256,7 @@
         // Rellena el select de armas cuando cambia el tipo
         function rellenarArmas() {
             const tipo = tipoSelect.value;
-            armaSelect.innerHTML = '<option value="">Selecciona arma...</option>';
+            armaSelect.innerHTML = '<option value="">' + SELECT_WEAPON_LABEL + '</option>';
 
             if (!tipo || !ARMAS_POR_TIPO[tipo]) {
                 return;

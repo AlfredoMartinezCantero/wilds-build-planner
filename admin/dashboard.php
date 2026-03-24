@@ -7,7 +7,7 @@ require_once __DIR__ . '/../inc/conectar.php';
 
 // Solo admins
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
-    die("Acceso denegado.");
+    die(htmlspecialchars($LANG['admin_access_denied'] ?? 'Acceso denegado.'));
 }
 
 /* MÉTRICAS PRINCIPALES */
@@ -76,28 +76,28 @@ include __DIR__ . '/../inc/cabecera.php';
 <link rel="stylesheet" href="../front/css/estilo.css">
 
 <main class="panel-admin">
-    <h1 style="color:var(--gold);">Dashboard</h1>
-    <p class="subtexto">Vista general del estado del sistema.</p>
+    <h1 style="color:var(--gold);"><?php echo htmlspecialchars($LANG['admin_panel_title'] ?? 'Dashboard'); ?></h1>
+    <p class="subtexto"><?php echo htmlspecialchars($LANG['admin_welcome'] ?? 'Vista general...'); ?></p>
 
     <!-- MÉTRICAS -->
     <div style="display:flex; gap:15px; flex-wrap:wrap; margin-bottom:25px;">
         <div class="admin-card" style="flex:1;">
-            <h3>👥 Usuarios</h3>
+            <h3>👥 <?php echo htmlspecialchars($LANG['admin_stats_users'] ?? 'Usuarios'); ?></h3>
             <p><?= $total_usuarios ?></p>
         </div>
 
         <div class="admin-card" style="flex:1;">
-            <h3>🛠 Builds</h3>
+            <h3>🛠 <?php echo htmlspecialchars($LANG['admin_stats_builds'] ?? 'Builds'); ?></h3>
             <p><?= $total_builds ?></p>
         </div>
 
         <div class="admin-card" style="flex:1;">
-            <h3>🌐 Públicas</h3>
+            <h3>🌐 <?php echo htmlspecialchars($LANG['admin_stats_public_builds'] ?? 'Públicas'); ?></h3>
             <p><?= $builds_publicas ?></p>
         </div>
 
         <div class="admin-card" style="flex:1;">
-            <h3>📅 Hoy</h3>
+            <h3>📅 <?php echo htmlspecialchars($LANG['admin_stats_builds_today'] ?? 'Hoy'); ?></h3>
             <p><?= $builds_hoy ?></p>
         </div>
     </div>
@@ -105,12 +105,12 @@ include __DIR__ . '/../inc/cabecera.php';
     <!-- GRÁFICOS -->
     <div style="display:flex; gap:30px; flex-wrap:wrap; margin-bottom:40px;">
         <div style="flex:1; min-width:300px; background:var(--bg-card); padding:20px; border-radius:12px;">
-            <h3 style="color:var(--gold); margin-bottom:15px;">Builds por día</h3>
+            <h3 style="color:var(--gold); margin-bottom:15px;"><?php echo htmlspecialchars($LANG['admin_chart_builds_by_day'] ?? 'Builds por día'); ?></h3>
             <canvas id="chartDias"></canvas>
         </div>
 
         <div style="flex:1; min-width:300px; background:var(--bg-card); padding:20px; border-radius:12px;">
-            <h3 style="color:var(--gold); margin-bottom:15px;">Públicas / Privadas</h3>
+            <h3 style="color:var(--gold); margin-bottom:15px;"><?php echo htmlspecialchars($LANG['admin_public'] ?? 'Públicas'); ?> / <?php echo htmlspecialchars($LANG['admin_private'] ?? 'Privadas'); ?></h3>
             <canvas id="chartPublicas"></canvas>
         </div>
     </div>
@@ -120,12 +120,12 @@ include __DIR__ . '/../inc/cabecera.php';
         
         <!-- Últimas builds -->
         <div style="flex:1; min-width:320px;">
-            <h3 style="color:var(--gold);">Últimas builds</h3>
+            <h3 style="color:var(--gold);"><?php echo htmlspecialchars($LANG['admin_latest_builds'] ?? 'Últimas builds'); ?></h3>
             <table class="admin-table">
                 <tr>
-                    <th>Título</th>
-                    <th>Usuario</th>
-                    <th>Fecha</th>
+                    <th><?php echo htmlspecialchars($LANG['admin_title'] ?? 'Título'); ?></th>
+                    <th><?php echo htmlspecialchars($LANG['account'] ?? 'Usuario'); ?></th>
+                    <th><?php echo htmlspecialchars($LANG['date'] ?? 'Fecha'); ?></th>
                 </tr>
                 <?php while ($b = $ultimas_builds->fetch_assoc()): ?>
                 <tr>
@@ -139,11 +139,11 @@ include __DIR__ . '/../inc/cabecera.php';
 
         <!-- Últimos usuarios -->
         <div style="flex:1; min-width:320px;">
-            <h3 style="color:var(--gold);">Últimos usuarios</h3>
+            <h3 style="color:var(--gold);"><?php echo htmlspecialchars($LANG['admin_latest_users'] ?? 'Últimos usuarios'); ?></h3>
             <table class="admin-table">
                 <tr>
-                    <th>Email</th>
-                    <th>Fecha</th>
+                    <th><?php echo htmlspecialchars($LANG['email'] ?? 'Email'); ?></th>
+                    <th><?php echo htmlspecialchars($LANG['date'] ?? 'Fecha'); ?></th>
                 </tr>
                 <?php while ($u = $Ultimos = $ultimos_users->fetch_assoc()): ?>
                 <tr>
@@ -168,7 +168,7 @@ new Chart(document.getElementById('chartDias'), {
     data: {
         labels: <?= json_encode($labels_dias) ?>,
         datasets: [{
-            label: 'Builds creadas',
+            label: <?php echo json_encode($LANG['admin_builds_created'] ?? 'Builds creadas'); ?>,
             data: <?= json_encode($data_dias) ?>,
             backgroundColor: '#e5c784',
             borderColor: '#c6a667',
@@ -186,7 +186,7 @@ new Chart(document.getElementById('chartDias'), {
 new Chart(document.getElementById('chartPublicas'), {
     type: 'doughnut',
     data: {
-        labels: ['Públicas', 'Privadas'],
+        labels: [<?php echo json_encode($LANG['admin_public'] ?? 'Públicas'); ?>, <?php echo json_encode($LANG['admin_private'] ?? 'Privadas'); ?>],
         datasets: [{
             data: [<?= $builds_publicas ?>, <?= $privadas ?>],
             backgroundColor: ['#e5c784', '#555'],

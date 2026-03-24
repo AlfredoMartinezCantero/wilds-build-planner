@@ -1,31 +1,31 @@
 <?php
+require_once "../inc/sesion.php";
 include "../inc/cabecera.php";
 ?>
 <link rel="stylesheet" href="../front/css/estilo.css">
 
 <main>
     <section class="panel-admin">
-        <h1>Panel de Administración</h1>
+        <h1><?php echo htmlspecialchars($LANG['admin_panel_title'] ?? 'Panel de Administración'); ?></h1>
         <p class="subtexto">
-            Bienvenido al panel donde podrás gestionar usuarios, revisar builds 
-            y controlar el estado general del sistema.
+            <?php echo htmlspecialchars($LANG['admin_welcome'] ?? 'Bienvenido al panel...'); ?>
         </p>
 
         <div class="admin-grid">
 
             <a href="dashboard.php" class="admin-card">
                 <h3>📊 Dashboard</h3>
-                <p>Vista general del estado del sistema.</p>
+                <p><?php echo htmlspecialchars($LANG['admin_stats_public_builds'] ?? 'Vista general...'); ?></p>
             </a>
 
             <a href="gestionar_usuarios.php" class="admin-card">
-                <h3>👥 Usuarios</h3>
-                <p>Listado, edición y eliminación de usuarios.</p>
+                <h3>👥 <?php echo htmlspecialchars($LANG['admin_users'] ?? 'Usuarios'); ?></h3>
+                <p><?php echo htmlspecialchars($LANG['admin_users_desc'] ?? 'Listado, edición...'); ?></p>
             </a>
 
             <a href="moderar_builds.php" class="admin-card">
-                <h3>🛠 Moderar Builds</h3>
-                <p>Gestiona builds públicas o reportadas por usuarios.</p>
+                <h3>🛠 <?php echo htmlspecialchars($LANG['admin_moderate_builds'] ?? 'Moderar Builds'); ?></h3>
+                <p><?php echo htmlspecialchars($LANG['admin_moderate_builds_desc'] ?? 'Gestiona builds...'); ?></p>
             </a>
 
         </div>

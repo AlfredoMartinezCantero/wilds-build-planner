@@ -46,20 +46,19 @@ include __DIR__ . "/../inc/cabecera.php";
     <tr>
         <td><?= $b['id'] ?></td>
         <td><?= htmlspecialchars($b['titulo']); ?></td>
-        <td><?= $b['es_publica'] ? "Pública" : "Privada"; ?></td>
+        <td><?= $b['es_publica'] ? htmlspecialchars($LANG['public'] ?? 'Pública') : htmlspecialchars($LANG['private'] ?? 'Privada'); ?></td>
         <td><?= $b['created_at']; ?></td>
         <td>        
     <!-- Ver -->
-    <a href="ver_build.php?id=<?= $b['id'] ?>" class="btn-mh">Ver</a>
+    <a href="ver_build.php?id=<?= $b['id'] ?>" class="btn-mh"><?php echo htmlspecialchars($LANG['view'] ?? 'Ver'); ?></a>
 
     <!-- Editar -->
-    <a href="editar_build.php?id=<?= $b['id'] ?>" class="btn-mh">Editar</a>
+    <a href="editar_build.php?id=<?= $b['id'] ?>" class="btn-mh"><?php echo htmlspecialchars($LANG['edit'] ?? 'Editar'); ?></a>
 
     <!-- Eliminar -->
     <form action="../back/php/delete_build.php" method="POST" style="display:inline;"
-          onsubmit="return confirm('¿Seguro que quieres eliminar esta build?');">
-        <input type="hidden" name="build_id" value="<?= $b['id'] ?>">
-        <button type="submit" class="btn-delete-build">Eliminar</button>
+          onsubmit="return confirm('<?php echo htmlspecialchars($LANG['confirm_delete_build'] ?? '¿Seguro que quieres eliminar esta build?'); ?>');">        <input type="hidden" name="build_id" value="<?= $b['id'] ?>">
+        <button type="submit" class="btn-delete-build"><?php echo htmlspecialchars($LANG['delete'] ?? 'Eliminar'); ?></button>
     </form>
 
         </td>

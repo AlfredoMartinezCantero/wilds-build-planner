@@ -35,32 +35,32 @@ include __DIR__ . "/../inc/cabecera.php";
 <main>
     <div class="form-container" style="max-width:500px; margin:auto;">
         <h2 style="text-align:center; margin-bottom:20px; color:var(--gold);">
-            Editar Perfil
+            <?php echo htmlspecialchars($LANG['edit_profile'] ?? 'Editar Perfil'); ?>
         </h2>
 
         <form action="../back/php/save_profile.php" method="POST">
 
             <div class="form-group">
-                <label>Nickname</label>
+                <label><?php echo htmlspecialchars($LANG['nickname'] ?? 'Nickname'); ?></label>
                 <input type="text" name="nickname" value="<?= htmlspecialchars($nickname) ?>">
             </div>
 
             <div class="form-group">
-                <label>Hunter Rank</label>
+                <label><?php echo htmlspecialchars($LANG['hunter_rank'] ?? 'Hunter Rank'); ?></label>
                 <input type="number" name="hunter_rank"
                        value="<?= htmlspecialchars($hunter_rank) ?>">
             </div>
 
             <div class="form-group">
-                <label>Preferencias (JSON)</label>
+                <label><?php echo htmlspecialchars($LANG['account'] ?? 'Preferencias'); ?></label>
                 <textarea name="prefs_json" rows="5"><?= htmlspecialchars($prefs) ?></textarea>
             </div>
 
-            <button type="submit" class="btn-guardar-build">Guardar cambios</button>
+            <button type="submit" class="btn-guardar-build"><?php echo htmlspecialchars($LANG['save_changes'] ?? 'Guardar cambios'); ?></button>
         </form>
 
         <div class="bottom-text">
-            <a href="perfil.php">Volver al perfil</a>
+            <a href="perfil.php"><?php echo htmlspecialchars($LANG['back_to_profile'] ?? 'Volver al perfil'); ?></a>
         </div>
     </div>
 </main>

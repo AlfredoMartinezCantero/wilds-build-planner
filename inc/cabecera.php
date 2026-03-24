@@ -1,44 +1,43 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="<?php echo htmlspecialchars($_SESSION['lang'] ?? 'es'); ?>">
 <head>
     <meta charset="UTF-8">
-    <title>MH Wilds Builder</title>
+    <title><?php echo htmlspecialchars($LANG['site_title'] ?? 'MH Wilds Builder'); ?></title>
     <link rel="stylesheet" href="css/estilo.css">
     <?php if(isset($css_propio)): ?>
-        <link rel="stylesheet" href="css/<?php echo $css_propio; ?>">
+        <link rel="stylesheet" href="css/<?php echo htmlspecialchars($css_propio); ?>">
     <?php endif; ?>
 </head>
 
 <body>
 
 <nav>
-    <a href="../front/index.php">Inicio</a>
-    <a href="../front/planner.php">Planificador de Builds</a>
+    <a href="../front/index.php"><?php echo htmlspecialchars($LANG['nav_home'] ?? 'Inicio'); ?></a>
+    <a href="../front/planner.php"><?php echo htmlspecialchars($LANG['nav_planner_full'] ?? 'Planificador de Builds'); ?></a>
     <?php 
-        include_once "sesion.php"; 
         if(isset($_SESSION['id_usuario'])):
     ?>
         <!-- Usuario logeado -->
-        <a href="../front/perfil.php">Mi Perfil</a>
-        <a href="../front/mis_builds.php">Mis Builds</a>
-        <a href="../front/logout.php">Cerrar sesión</a>
+        <a href="../front/perfil.php"><?php echo htmlspecialchars($LANG['nav_profile'] ?? 'Mi Perfil'); ?></a>
+        <a href="../front/mis_builds.php"><?php echo htmlspecialchars($LANG['nav_builds'] ?? 'Mis Builds'); ?></a>
+        <a href="../front/logout.php"><?php echo htmlspecialchars($LANG['nav_logout'] ?? 'Cerrar sesión'); ?></a>
 
         <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
-            <a href="../admin/index.php">Panel Admin</a>
+            <a href="../admin/index.php"><?php echo htmlspecialchars($LANG['nav_admin'] ?? 'Panel Admin'); ?></a>
         <?php endif; ?>
 
     <?php else: ?>
         <!-- Usuario no logeado -->
-        <a href="login.php">Iniciar sesión</a>
-        <a href="register.php">Registrarse</a>
+        <a href="../front/login.php"><?php echo htmlspecialchars($LANG['nav_login'] ?? 'Iniciar sesión'); ?></a>
+        <a href="../front/register.php"><?php echo htmlspecialchars($LANG['nav_register'] ?? 'Registrarse'); ?></a>
     <?php endif; ?>
     <!-- Botón de tema claro/oscuro -->
     <button type="button" id="theme-toggle" style="margin-left:10px; padding:6px 10px; 
             background:none; border:1px solid var(--border); border-radius:6px; 
             color:var(--text); cursor:pointer; font-size:0.9rem;">
-        🌙 Oscuro
+        <?php echo htmlspecialchars($LANG['theme_dark'] ?? '🌙 Oscuro'); ?>
     </button>
-    <a href="../inc/cambiar_idioma.php" class="btn-lang" id="lang-toggle">🌐 ES</a>
+    <a href="../inc/cambiar_idioma.php" class="btn-lang" id="lang-toggle"><?php echo htmlspecialchars($LANG['lang_toggle'] ?? '🌐 ES'); ?></a>
 </nav>
 
 <script>

@@ -7,7 +7,7 @@ require_once __DIR__ . '/../inc/conectar.php';
 
 // SOLO ADMIN
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
-    die("Acceso denegado.");
+    die(htmlspecialchars($LANG['admin_access_denied'] ?? 'Acceso denegado.'));
 }
 
 // Cargar usuarios + perfiles
@@ -28,17 +28,17 @@ include __DIR__ . '/../inc/cabecera.php';
 ?>
 <link rel="stylesheet" href="../front/css/estilo.css">
 <main class="panel-admin">
-    <h1>Gestión de Usuarios</h1>
+    <h1><?php echo htmlspecialchars($LANG['admin_user_management'] ?? 'Gestión de Usuarios'); ?></h1>
 
     <table class="admin-table">
         <tr>
             <th>ID</th>
-            <th>Email</th>
-            <th>Nickname</th>
-            <th>HR</th>
-            <th>Rol</th>
-            <th>Registro</th>
-            <th>Acciones</th>
+            <th><?php echo htmlspecialchars($LANG['admin_user_email'] ?? 'Email'); ?></th>
+            <th><?php echo htmlspecialchars($LANG['nickname'] ?? 'Nickname'); ?></th>
+            <th><?php echo htmlspecialchars($LANG['admin_user_hr'] ?? 'HR'); ?></th>
+            <th><?php echo htmlspecialchars($LANG['admin_user_role'] ?? 'Rol'); ?></th>
+            <th><?php echo htmlspecialchars($LANG['admin_user_register'] ?? 'Registro'); ?></th>
+            <th><?php echo htmlspecialchars($LANG['admin_actions'] ?? 'Acciones'); ?></th>
         </tr>
 
         <?php while ($u = $res->fetch_assoc()): ?>
@@ -52,15 +52,16 @@ include __DIR__ . '/../inc/cabecera.php';
 
                 <td>
                     <!-- Editar usuario -->
-                    editar_usuarios.php?id=<?= $u['id'] ?>" 
-                       class="btn-mh">Editar</a>
+                    <a href="editar_usuarios.php?id=<?= $u['id'] ?>" 
+                       class="btn-mh"><?php echo htmlspecialchars($LANG['admin_edit_user'] ?? 'Editar'); ?></a>
 
                     <!-- Eliminar usuario -->
-                    ../back/php/admin_actions.php
+                    <form action="../back/php/admin_actions.php" method="POST" style="display:inline;">
                         <input type="hidden" name="action" value="delete_user">
                         <input type="hidden" name="id" value="<?= $u['id'] ?>">
-                        <button type="submit" class="btn-delete-build">
-                            Eliminar
+                        <button type="submit" class="btn-delete-build"
+                                onclick="return confirm('<?php echo htmlspecialchars($LANG['confirm_delete_build'] ?? '¿Estás seguro?'); ?>');">
+                            <?php echo htmlspecialchars($LANG['admin_delete_user'] ?? 'Eliminar'); ?>
                         </button>
                     </form>
                 </td>

@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    $error = "Usuario o contraseña incorrectos";
+    $error = $LANG['invalid_credentials'] ?? 'Usuario o contraseña incorrectos';
 }
 ?>
 
@@ -45,33 +45,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <main>
     <div class="form-container">
 
-        <h2>Iniciar Sesión</h2>
+        <h2><?php echo htmlspecialchars($LANG['login_title'] ?? 'Iniciar Sesión'); ?></h2>
 
         <?php if($error): ?>
             <p style="color:#ff8888;text-align:center;margin-bottom:15px;">
-                <?= $error ?>
+                <?= htmlspecialchars($error) ?>
             </p>
         <?php endif; ?>
 
         <form method="POST">
 
             <div class="form-group">
-                <label for="usuario">Usuario o Email</label>
+                <label for="usuario"><?php echo htmlspecialchars($LANG['username_or_email'] ?? 'Usuario o Email'); ?></label>
                 <input type="text" id="usuario" name="usuario" required>
             </div>
 
             <div class="form-group">
-                <label for="password">Contraseña</label>
+                <label for="password"><?php echo htmlspecialchars($LANG['password'] ?? 'Contraseña'); ?></label>
                 <input type="password" id="password" name="password" required>
             </div>
 
-            <button type="submit">Entrar</button>
+            <button type="submit"><?php echo htmlspecialchars($LANG['login'] ?? 'Entrar'); ?></button>
 
         </form>
 
         <div class="bottom-text">
-            ¿No tienes cuenta?
-            <a href="../front/register.php">Regístrate</a>
+            <?php echo htmlspecialchars($LANG['no_account'] ?? '¿No tienes cuenta?'); ?>
+            <a href="../front/register.php"><?php echo htmlspecialchars($LANG['register_link'] ?? 'Regístrate'); ?></a>
         </div>
 
     </div>

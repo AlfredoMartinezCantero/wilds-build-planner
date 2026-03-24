@@ -89,43 +89,43 @@ $resUltimas = $conexion->query($sqlUltimas);
 
 <hr style="margin:20px 0; border-color:var(--border);">
 
-<h3 style="color:var(--gold-bright); margin-bottom:10px;">Historial de builds</h3>
+<h3 style="color:var(--gold-bright); margin-bottom:10px;"><?php echo htmlspecialchars($LANG['history_builds'] ?? 'Historial de builds'); ?></h3>
 
 <p>
-    <strong>Total builds:</strong> <?= (int)$stats['total']; ?> <br>
-    <strong>Builds públicas:</strong> <?= (int)$stats['publicas']; ?> <br>
-    <strong>Última build:</strong> 
-    <?= $stats['ultima'] ? htmlspecialchars($stats['ultima']) : 'Sin builds aún'; ?>
+    <strong><?php echo htmlspecialchars($LANG['total_builds'] ?? 'Total builds'); ?>:</strong> <?= (int)$stats['total']; ?> <br>
+    <strong><?php echo htmlspecialchars($LANG['public_builds'] ?? 'Builds públicas'); ?>:</strong> <?= (int)$stats['publicas']; ?> <br>
+    <strong><?php echo htmlspecialchars($LANG['last_build'] ?? 'Última build'); ?>:</strong> 
+    <?= $stats['ultima'] ? htmlspecialchars($stats['ultima']) : htmlspecialchars($LANG['no_builds'] ?? 'Sin builds aún'); ?>
 </p>
 
 <?php if ($stats['total'] > 0): ?>
-    <h4 style="color:var(--gold); margin-top:15px; margin-bottom:8px;">Tus últimas builds</h4>
+    <h4 style="color:var(--gold); margin-top:15px; margin-bottom:8px;"><?php echo htmlspecialchars($LANG['your_last_builds'] ?? 'Tus últimas builds'); ?></h4>
     <table class="admin-table">
         <tr>
-            <th>Título</th>
-            <th>Visibilidad</th>
-            <th>Fecha</th>
-            <th>Acción</th>
+            <th><?php echo htmlspecialchars($LANG['builds_table_title'] ?? 'Título'); ?></th>
+            <th><?php echo htmlspecialchars($LANG['builds_table_visibility'] ?? 'Visibilidad'); ?></th>
+            <th><?php echo htmlspecialchars($LANG['date'] ?? 'Fecha'); ?></th>
+            <th><?php echo htmlspecialchars($LANG['action'] ?? 'Acción'); ?></th>
         </tr>
         <?php while ($b = $resUltimas->fetch_assoc()): ?>
             <tr>
                 <td><?= htmlspecialchars($b['titulo']); ?></td>
-                <td><?= $b['es_publica'] ? 'Pública' : 'Privada'; ?></td>
+                <td><?= $b['es_publica'] ? htmlspecialchars($LANG['public'] ?? 'Pública') : htmlspecialchars($LANG['private'] ?? 'Privada'); ?></td>
                 <td><?= $b['created_at']; ?></td>
                 <td>
-                    <a href="../front/ver_build.php?id=<?= $b['id']; ?>" class="btn-mh">Ver</a>
+                    <a href="../front/ver_build.php?id=<?= $b['id']; ?>" class="btn-mh"><?php echo htmlspecialchars($LANG['view'] ?? 'Ver'); ?></a>
                 </td>
             </tr>
         <?php endwhile; ?>
     </table>
 <?php else: ?>
-    <p style="color:var(--text-muted);">Todavía no has creado ninguna build. 
-        <a href="mis_builds.php">Crea tu primera build</a>.
+    <p style="color:var(--text-muted);"><?php echo htmlspecialchars($LANG['no_builds_created'] ?? 'Todavía no has creado ninguna build.'); ?>
+        <a href="mis_builds.php"><?php echo htmlspecialchars($LANG['create_first_build'] ?? 'Crea tu primera build'); ?></a>.
     </p>
 <?php endif; ?>
         <div style="text-align:center; margin-top:25px; display:flex; justify-content:center; gap:15px;">
-            <a href="editar_perfil.php" class="btn-mh">Editar Perfil</a>
-            <a href="mis_builds.php" class="btn-mh">Mis Builds</a>
+            <a href="editar_perfil.php" class="btn-mh"><?php echo htmlspecialchars($LANG['edit_profile'] ?? 'Editar Perfil'); ?></a>
+            <a href="mis_builds.php" class="btn-mh"><?php echo htmlspecialchars($LANG['page_my_builds'] ?? 'Mis Builds'); ?></a>
         </div>
     </div>
 </main>
