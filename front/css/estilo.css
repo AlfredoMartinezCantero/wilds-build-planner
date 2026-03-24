@@ -543,3 +543,27 @@ body.theme-light footer {
     color: #7CFC00;    /* verde estilo "éxito" */
     font-weight: bold;
 }
+
+/* Estilo para las notas del planner */
+
+.planner-notes {
+    width: 100%;
+    min-height: 120px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    transition: var(--transition);
+    box-shadow: 0 3px 10px var(--shadow);
+}
+
+.planner-notes:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: var(--bg-card);
+    box-shadow: 0 0 8px var(--gold-bright);
+}

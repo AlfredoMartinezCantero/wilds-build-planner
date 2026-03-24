@@ -98,7 +98,7 @@
 
         <div class="form-group">
             <label>Notas</label>
-            <textarea name="notas" rows="3" placeholder="Notas rápidas de la build"></textarea>
+            <textarea name="notas" class="planner-notes" placeholder="Notas de la build..."></textarea>
         </div>
 
         <div class="form-group">
