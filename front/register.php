@@ -6,29 +6,56 @@ $mensaje = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $usuario = $_POST["usuario"];
-    $email = $_POST["email"];
-    $pass = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    $usuario = trim($_POST["usuario"] ?? "");
+    $email   = trim($_POST["email"] ?? "");
+    $pass_raw = $_POST["password"] ?? "";
 
-    /* INSERT EN users */
-    $sql = "INSERT INTO users (email, password_hash)
-            VALUES ('$email', '$pass')";
+    // Validación de contraseña 
+    $errores = [];
 
-    if (mysqli_query($conexion, $sql)) {
+    if (strlen($pass_raw) < 8) {
+        $errores[] = "La contraseña debe tener al menos 8 caracteres.";
+    }
+    if (!preg_match('/[A-Z]/', $pass_raw)) {
+        $errores[] = "La contraseña debe incluir al menos una letra mayúscula.";
+    }
+    if (!preg_match('/[a-z]/', $pass_raw)) {
+        $errores[] = "La contraseña debe incluir al menos una letra minúscula.";
+    }
+    if (!preg_match('/[0-9]/', $pass_raw)) {
+        $errores[] = "La contraseña debe incluir al menos un número.";
+    }
+    if (!preg_match('/[\W_]/', $pass_raw)) {
+        $errores[] = "La contraseña debe incluir al menos un carácter especial.";
+    }
 
-        // Recupera el ID del usuario recién creado
-        $user_id = mysqli_insert_id($conexion);
-
-        /* INSERT EN profiles, se guarda el perfil asociado al usuario */
-        $sql2 = "INSERT INTO profiles (user_id, nickname)
-                 VALUES ($user_id, '$usuario')";
-        mysqli_query($conexion, $sql2);
-
-        $mensaje = "Usuario registrado. Ahora puedes iniciar sesión.";
+    if (!empty($errores)) {
+        $mensaje = implode("<br>", $errores);
     } 
     else {
-        // Si falla el insert se muestra un mensaje genérico
-        $mensaje = "Error: el email ya existe.";
+        // Hash seguro
+        $pass = password_hash($pass_raw, PASSWORD_DEFAULT);
+
+        // Insert en users
+        $sql = "INSERT INTO users (email, password_hash)
+                VALUES ('$email', '$pass')";
+
+        if (mysqli_query($conexion, $sql)) {
+
+            $user_id = mysqli_insert_id($conexion);
+
+            // Insert en profiles
+            $usuario_esc = mysqli_real_escape_string($conexion, $usuario);
+
+            $sql2 = "INSERT INTO profiles (user_id, nickname)
+                     VALUES ($user_id, '$usuario_esc')";
+            mysqli_query($conexion, $sql2);
+
+            $mensaje = "Usuario registrado. Ahora puedes iniciar sesión.";
+
+        } else {
+            $mensaje = "Error: el email ya existe.";
+        }
     }
 }
 ?>
@@ -62,9 +89,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="form-group">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" required>
-            </div>
-
-            <button type="submit">Registrarse</button>
+                <div id="password-requisitos" style="margin-top:10px;">
+                <p style="color:var(--text-muted); margin-bottom:8px;">Requisitos de la contraseña:</p>
+                <ul id="password-checklist" style="list-style:none; padding-left:0; font-size:0.9rem;">
+                    <li id="req-length"   class="req-item">❌ Mínimo 8 caracteres</li>
+                    <li id="req-upper"    class="req-item">❌ Al menos una MAYÚSCULA</li>
+                    <li id="req-lower"    class="req-item">❌ Al menos una minúscula</li>
+                    <li id="req-number"   class="req-item">❌ Al menos un número</li>
+                    <li id="req-special"  class="req-item">❌ Al menos un símbolo especial</li>
+                </ul>
+</div>
+        <button type="submit">Registrarse</button>
         </form>
 
         <div class="bottom-text">
@@ -76,3 +111,60 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </main>
 
 <?php include "../inc/pie.php"; ?>
+
+<script>
+document.getElementById("password").addEventListener("input", function () {
+    const p = this.value;
+    const rules = document.getElementById("password-rules");
+
+    let ok = true;
+    let html = "";
+
+    if (p.length < 8) { ok=false; html += "• Min. 8 caracteres<br>"; }
+    if (!/[A-Z]/.test(p)) { ok=false; html += "• Necesita una mayúscula<br>"; }
+    if (!/[a-z]/.test(p)) { ok=false; html += "• Necesita una minúscula<br>"; }
+    if (!/[0-9]/.test(p)) { ok=false; html += "• Necesita un número<br>"; }
+    if (!/[\W_]/.test(p)) { ok=false; html += "• Necesita un símbolo<br>"; }
+
+    rules.innerHTML = html || "✔ Contraseña fuerte";
+    rules.style.color = html ? "var(--text-muted)" : "var(--gold-bright)";
+});
+</script>
+
+<script>
+document.getElementById("password").addEventListener("input", function () {
+    const p = this.value;
+
+    const reqLength  = document.getElementById("req-length");
+    const reqUpper   = document.getElementById("req-upper");
+    const reqLower   = document.getElementById("req-lower");
+    const reqNumber  = document.getElementById("req-number");
+    const reqSpecial = document.getElementById("req-special");
+
+    // Longitud
+    toggle(reqLength,  p.length >= 8);
+
+    // Mayúscula
+    toggle(reqUpper,   /[A-Z]/.test(p));
+
+    // Minúscula
+    toggle(reqLower,   /[a-z]/.test(p));
+
+    // Número
+    toggle(reqNumber,  /[0-9]/.test(p));
+
+    // Símbolo especial
+    toggle(reqSpecial, /[\W_]/.test(p));
+});
+
+// Función para marcar ✔ o ❌
+function toggle(element, condition) {
+    if (condition) {
+        element.classList.add("ok");
+        element.innerHTML = "✔ " + element.innerHTML.slice(2);
+    } else {
+        element.classList.remove("ok");
+        element.innerHTML = "❌ " + element.innerHTML.slice(2);
+    }
+}
+</script>

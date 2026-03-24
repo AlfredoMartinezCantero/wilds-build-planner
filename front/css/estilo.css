@@ -532,3 +532,14 @@ body.theme-light footer {
         max-width: 250px;
     }
 }
+
+.req-item {
+    color: #ff6b6b;    /* rojo MH */
+    margin: 3px 0;
+    transition: 0.2s ease;
+}
+
+.req-item.ok {
+    color: #7CFC00;    /* verde estilo "éxito" */
+    font-weight: bold;
+}
