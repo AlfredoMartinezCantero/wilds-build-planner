@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo htmlspecialchars($LANG['site_title'] ?? 'MH Wilds Builder'); ?></title>
-    <link rel="stylesheet" href="css/estilo.css">
-    <?php if(isset($css_propio)): ?>
-        <link rel="stylesheet" href="css/<?php echo htmlspecialchars($css_propio); ?>">
+
+    <!-- CSS SIEMPRE desde ruta absoluta -->
+    <link rel="stylesheet" href="/wilds-build-planner/front/css/estilo.css">
+
+    <?php if (isset($css_propio)): ?>
+    <link rel="stylesheet" href="/wilds-build-planner/front/css/<?= htmlspecialchars($css_propio) ?>">
     <?php endif; ?>
 </head>
 

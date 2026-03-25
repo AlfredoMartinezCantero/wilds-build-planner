@@ -20,7 +20,26 @@ if ($action === 'update_user') {
 
     $nickname = $conexion->real_escape_string($_POST['nickname']);
     $hr = (int)$_POST['hunter_rank'];
-    $prefs = $conexion->real_escape_string($_POST['prefs_json']);
+    // Si está vacío → usar JSON vacío {}
+    $rawPrefs = trim($_POST['prefs_json'] ?? '');
+
+    if ($rawPrefs === '') {
+        $prefs = '{}';
+    } else {
+        // Intentar decodificar para verificar si es JSON válido
+        json_decode($rawPrefs);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            // Si NO es JSON válido → convertirlo en JSON string
+            $prefs = json_encode($rawPrefs, JSON_UNESCAPED_UNICODE);
+        } else {
+            // JSON válido → se usa tal cual
+            $prefs = $rawPrefs;
+        }
+    }
+
+    // Escapar para MySQL
+    $prefs = $conexion->real_escape_string($prefs);
 
     // Actualizar tabla users
     $conexion->query("
